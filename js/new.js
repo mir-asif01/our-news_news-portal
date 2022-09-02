@@ -34,6 +34,11 @@ const showNews = (newsArray) =>{
     newsContainer.innerHTML = '';
     const newsArrayLength = newsArray.length;
     const itemCounter = document.getElementById('item-counter');
+
+    if(newsArrayLength ===0){
+    itemCounter.innerText = `no news found`;
+    }
+    else{
     itemCounter.innerText = `${newsArrayLength} news found`;
     // itemCounter.innerText = '';
     for(const news of newsArray){
@@ -48,7 +53,7 @@ const showNews = (newsArray) =>{
         <div class="card lg:card-side bg-base-100 m-3 shadow-xl">
         <img src="${news.thumbnail_url}" alt="Album">
         <div class="card-body">
-          <h2 class="card-title">${news.title}</h2>
+          <h2 class="card-title font-bold">${news.title}</h2>
           <p>${news.details.length>200 ? news.details.slice(0,100)+'....' : news.details}</p>
           <div class="card-actions flex justify-between items-center">
                 <div>
@@ -57,6 +62,7 @@ const showNews = (newsArray) =>{
                 </div>
                 <div>
                 <h1>Published : ${news.author.published_date ? news.author.published_date : 'Data is not available' }</h1>
+                <h1>Total Views : ${news.total_view ? news.total_view : 'no data found'}</h1>
                 </div>
                 <div>
                     <label for="my-modal-3" class="btn btn-primary">Deatails</label>
@@ -68,6 +74,7 @@ const showNews = (newsArray) =>{
         `
         newsContainer.appendChild(newNewsDiv);
     }
+}
 }
 
 const showDetails = (details,image) =>{
