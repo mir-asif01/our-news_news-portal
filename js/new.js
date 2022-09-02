@@ -34,16 +34,27 @@ const showNews = (newsArray) =>{
     newsContainer.innerHTML = '';
     for(const news of newsArray){
         console.log(news)
+        // console.log(news.author)
         // console.log(news.total_view ? news.total_view : 'no data')
         const newNewsDiv = document.createElement('div');
         newNewsDiv.innerHTML = `
         <div class="card lg:card-side bg-base-100 m-3 shadow-xl">
         <img src="${news.thumbnail_url}" alt="Album">
         <div class="card-body">
-          <h2 class="card-title">New album is released!</h2>
-          <p>Click the button to listen on Spotiwhy app.</p>
-          <div class="card-actions justify-end">
-            <button class="btn btn-primary">Listen</button>
+          <h2 class="card-title">${news.title}</h2>
+          <p>${news.details.length>200 ? news.details.slice(0,200)+'....' : news.details}</p>
+          <div class="card-actions flex justify-between items-center">
+                <div>
+                    <img src="${news.author.img}" class="w-10"/>
+                    <h1>${news.author.name ? news.author.name : 'Data is not available' }</h1>
+                </div>
+                <div>
+                <h1>Published : ${news.author.published_date ? news.author.published_date : 'Data is not available' }</h1>
+                </div>
+                <div>
+                    <button class="btn btn-primary">Details</button>
+                    <button class="btn btn-primary">Read More</button>
+                </div>
           </div>
         </div>
     </div>
