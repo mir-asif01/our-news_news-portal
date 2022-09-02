@@ -32,17 +32,24 @@ const loadNews = (category) =>{
 const showNews = (newsArray) =>{
     const newsContainer = document.getElementById('news-container');
     newsContainer.innerHTML = '';
+    const newsArrayLength = newsArray.length;
+    const itemCounter = document.getElementById('item-counter');
+    itemCounter.innerText = `${newsArrayLength} news found`;
+    // itemCounter.innerText = '';
     for(const news of newsArray){
         console.log(news)
         // console.log(news.author)
         // console.log(news.total_view ? news.total_view : 'no data')
+        const {details,image_url} = news;
+        // console.log(details)
+        // console.log(image_url)
         const newNewsDiv = document.createElement('div');
         newNewsDiv.innerHTML = `
         <div class="card lg:card-side bg-base-100 m-3 shadow-xl">
         <img src="${news.thumbnail_url}" alt="Album">
         <div class="card-body">
           <h2 class="card-title">${news.title}</h2>
-          <p>${news.details.length>200 ? news.details.slice(0,200)+'....' : news.details}</p>
+          <p>${news.details.length>200 ? news.details.slice(0,100)+'....' : news.details}</p>
           <div class="card-actions flex justify-between items-center">
                 <div>
                     <img src="${news.author.img}" class="w-10"/>
@@ -52,7 +59,7 @@ const showNews = (newsArray) =>{
                 <h1>Published : ${news.author.published_date ? news.author.published_date : 'Data is not available' }</h1>
                 </div>
                 <div>
-                    <button class="btn btn-primary">Details</button>
+                    <label for="my-modal-3" class="btn btn-primary">Deatails</label>
                     <button class="btn btn-primary">Read More</button>
                 </div>
           </div>
@@ -61,4 +68,20 @@ const showNews = (newsArray) =>{
         `
         newsContainer.appendChild(newNewsDiv);
     }
+}
+
+const showDetails = (details,image) =>{
+    const modalContainer = document.getElementById('modal-container');
+    modalContainer.innerHTML = ''
+    modalContainer.innerHTML = `
+    <input type="checkbox" id="my-modal-4" class="modal-toggle" />
+    <input type="checkbox" id="my-modal-3" class="modal-toggle" />
+    <div class="modal">
+      <div class="modal-box relative">
+        <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+        <img src="${image}">
+        <p class="py-4">${details}</p>
+      </div>
+    </div>
+    `
 }
