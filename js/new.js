@@ -30,7 +30,24 @@ const loadNews = (category) =>{
 }
 
 const showNews = (newsArray) =>{
+    const newsContainer = document.getElementById('news-container');
+    newsContainer.innerHTML = '';
     for(const news of newsArray){
-        console.log(news.total_view ? news.total_view : 'no data')
+        console.log(news)
+        // console.log(news.total_view ? news.total_view : 'no data')
+        const newNewsDiv = document.createElement('div');
+        newNewsDiv.innerHTML = `
+        <div class="card lg:card-side bg-base-100 m-3 shadow-xl">
+        <img src="${news.thumbnail_url}" alt="Album">
+        <div class="card-body">
+          <h2 class="card-title">New album is released!</h2>
+          <p>Click the button to listen on Spotiwhy app.</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary">Listen</button>
+          </div>
+        </div>
+    </div>
+        `
+        newsContainer.appendChild(newNewsDiv);
     }
 }
