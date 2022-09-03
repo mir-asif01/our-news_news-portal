@@ -3,7 +3,8 @@
 const loadCategories = () =>{
     fetch('https://openapi.programming-hero.com/api/news/categories')
     .then(res => res.json())
-    .then(categories => showCategories(categories.data.news_category));
+    .then(categories => showCategories(categories.data.news_category))
+    .catch(err => console.log(err));
 }
 const showCategories = (categories) =>{
     for(const category of categories){
@@ -11,7 +12,7 @@ const showCategories = (categories) =>{
         const categoryContainer = document.getElementById('categories');
         const newCategoryDiv = document.createElement('div');
         newCategoryDiv.innerHTML = `
-        <button class="text-2xl tab" onclick="loadNews(${category.category_id})" >${category.category_name}</button>
+        <button class="text-2xl " onclick="loadNews(${category.category_id})" >${category.category_name}</button>
         `
         categoryContainer.appendChild(newCategoryDiv)
     }
@@ -29,7 +30,9 @@ const loadNews = (category) =>{
     .then(res => res.json())
     .then(allNews => showNews(allNews.data));
 }
-// loadNews(08);
+
+
+
 const showNews = (newsArray) =>{
     const newsContainer = document.getElementById('news-container');
     newsContainer.innerHTML = '';
@@ -95,6 +98,7 @@ const showDetails = (details,image) =>{
     `
 }
 
+
 // common function for loader...
 const isLoading = (condition)=>{
     const loader = document.getElementById('loader');
@@ -110,3 +114,6 @@ const isLoading = (condition)=>{
 document.getElementById('blog').addEventListener('click',function(){
     window.location.href = './blog.html'
 })
+
+// loading all news on page load
+loadNews(08);
