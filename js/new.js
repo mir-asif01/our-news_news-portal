@@ -23,12 +23,13 @@ loadCategories();
 
 const loadNews = (category) =>{
     // console.log(category);
+    isLoading(true);
     const url =`https://openapi.programming-hero.com/api/news/category/0${category}`
     fetch(url)
     .then(res => res.json())
     .then(allNews => showNews(allNews.data));
 }
-
+// loadNews(08);
 const showNews = (newsArray) =>{
     const newsContainer = document.getElementById('news-container');
     newsContainer.innerHTML = '';
@@ -75,6 +76,7 @@ const showNews = (newsArray) =>{
         newsContainer.appendChild(newNewsDiv);
     }
 }
+isLoading(false);
 }
 
 const showDetails = (details,image) =>{
@@ -93,17 +95,18 @@ const showDetails = (details,image) =>{
     `
 }
 
-// const sortNewsAscendingByTotalViews = () =>{
-
-// }
-
-
+// common function for loader...
+const isLoading = (condition)=>{
+    const loader = document.getElementById('loader');
+    if(condition === true){
+        loader.style.display = 'block'
+    }
+    else{
+        loader.style.display = 'none'
+    }
+}
 // blog page redirecting onclick event..
 
 document.getElementById('blog').addEventListener('click',function(){
     window.location.href = './blog.html'
-})
-// news page redirecting onclick event
-document.getElementById('news').addEventListener('click',function(){
-    window.location.href = './index.html'
 })
