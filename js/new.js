@@ -19,7 +19,7 @@ const showCategories = (categories) =>{
         const categoryContainer = document.getElementById('categories');
         const newCategoryDiv = document.createElement('div');
         newCategoryDiv.innerHTML = `
-        <button class="text-2xl" onclick="loadNews(${category.category_id})" >
+        <button class="text-xl" onclick="loadNews(${category.category_id})" >
         <span class="text-red-400">${category.category_name}</span></button>
         `
         categoryContainer.appendChild(newCategoryDiv)
