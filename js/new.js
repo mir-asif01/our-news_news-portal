@@ -12,7 +12,7 @@ const showCategories = (categories) =>{
         const categoryContainer = document.getElementById('categories');
         const newCategoryDiv = document.createElement('div');
         newCategoryDiv.innerHTML = `
-        <button class="text-2xl " onclick="loadNews(${category.category_id})" >${category.category_name}</button>
+        <button class="text-2xl" onclick="loadNews(${category.category_id})" >${category.category_name}</button>
         `
         categoryContainer.appendChild(newCategoryDiv)
     }
@@ -109,11 +109,14 @@ const isLoading = (condition)=>{
         loader.style.display = 'none'
     }
 }
+document.getElementById('news').addEventListener('click',function(){
+    window.location.href = './index.html'
+})
 // blog page redirecting onclick event..
-
 document.getElementById('blog').addEventListener('click',function(){
     window.location.href = './blog.html'
 })
+//news page redirecting
 
 // loading all news on page load
 loadNews(08);
