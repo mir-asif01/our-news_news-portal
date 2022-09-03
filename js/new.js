@@ -33,25 +33,31 @@ const loadNews = (category) =>{
 
 
 
-const showNews = (newsArray) =>{
+const showNews = (UnsoetedNewsArray) =>{
+    console.log(UnsoetedNewsArray)
     const newsContainer = document.getElementById('news-container');
     newsContainer.innerHTML = '';
-    const newsArrayLength = newsArray.length;
     const itemCounter = document.getElementById('item-counter');
-
-    if(newsArrayLength ===0){
+    const sortedNewsArray = UnsoetedNewsArray.sort(function(a,b){
+        if(a.total_view > b.total_view){
+            return -1;
+        }
+        if(a.total_view<b.total_view){
+            return 1;
+        }
+        return 0;
+    })
+    const sortedNewsArrayLength = sortedNewsArray.length;
+    if(sortedNewsArray ===0){
     itemCounter.innerText = `no news found`;
     }
     else{
-    itemCounter.innerText = `${newsArrayLength} news found`;
+    // itemCounter.innerText = `${newsArrayLength} news found for category ${}`;
     // itemCounter.innerText = '';
-    for(const news of newsArray){
-        // console.log(news)
-        // console.log(news.author)
-        console.log(news.total_view ? news.total_view : 'no data')
+    for(const news of sortedNewsArray){
+        console.log(news.total_view)
+        itemCounter.innerText = `${sortedNewsArrayLength} news found`
         const {details,image_url} = news;
-        // console.log(details)
-        // console.log(image_url)
         const newNewsDiv = document.createElement('div');
         newNewsDiv.innerHTML = `
         <div class="card lg:card-side bg-base-100 m-3 shadow-xl">
@@ -109,14 +115,16 @@ const isLoading = (condition)=>{
         loader.style.display = 'none'
     }
 }
+
+//news page redirecting
 document.getElementById('news').addEventListener('click',function(){
     window.location.href = './index.html'
 })
+
 // blog page redirecting onclick event..
 document.getElementById('blog').addEventListener('click',function(){
     window.location.href = './blog.html'
 })
-//news page redirecting
 
 // loading all news on page load
 loadNews(08);
