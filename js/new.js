@@ -121,17 +121,17 @@ const isLoading = (condition)=>{
     }
 }
 
-//news page redirecting
-document.getElementById('news').addEventListener('click',function(){
-    window.location.href = './index.html'
-})
+// //news page redirecting
+// document.getElementById('news').addEventListener('click',function(){
+//     window.location.href = './index.html'
+// })
 
-// blog page redirecting onclick event..
-document.getElementById('blog').addEventListener('click',function(){
-    window.location.href = './blog.html'
-})
+// // blog page redirecting onclick event..
+// document.getElementById('blog').addEventListener('click',function(){
+//     window.location.href = './blog.html'
+// })
 
 //loading all categories on page load
 loadCategories();
 // loading all news on page load
-// loadNews(08);
+loadNews(08);
