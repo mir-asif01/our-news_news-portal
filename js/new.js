@@ -39,7 +39,7 @@ const loadNews = (category) =>{
 
 
 const showNews = (UnsoetedNewsArray) =>{
-    console.log(UnsoetedNewsArray)
+    // console.log(UnsoetedNewsArray)
     const newsContainer = document.getElementById('news-container');
     newsContainer.innerHTML = '';
     const itemCounter = document.getElementById('item-counter');
@@ -53,62 +53,64 @@ const showNews = (UnsoetedNewsArray) =>{
         return 0;
     })
     const sortedNewsArrayLength = sortedNewsArray.length;
-    if(sortedNewsArray ===0){
+    if(sortedNewsArrayLength ===0){
     itemCounter.innerText = `no news found`;
     }
     else{
-    // itemCounter.innerText = `${newsArrayLength} news found for category ${}`;
-    // itemCounter.innerText = '';
-    for(const news of sortedNewsArray){
-        console.log(news.total_view)
-        itemCounter.innerText = `${sortedNewsArrayLength} news found`
-        const {details,image_url} = news;
+    sortedNewsArray.forEach(news => {
+        console.log(news)
+        // const {details,image_url} = news;
+        itemCounter.innerText = `${sortedNewsArrayLength} news found`;        
+        // const {details,image_url} = news;
+        const {name,img,published_date} = news.author;
+        const {badge,number} = news.rating;
+        console.log(name,img)
         const newNewsDiv = document.createElement('div');
         newNewsDiv.innerHTML = `
         <div class="card lg:card-side bg-base-100 m-3 shadow-xl">
-        <img src="${news.thumbnail_url}" alt="Album">
-        <div class="card-body">
-          <h2 class="card-title font-bold">${news.title}</h2>
-          <p>${news.details.length>200 ? news.details.slice(0,100)+'....' : news.details}</p>
-          <div class="card-actions flex justify-between items-center">
+            <img src="${news.thumbnail_url}" alt="Album">
+            <div class="card-body">
+                <h2 class="card-title font-bold">${news.title}</h2>
+                <p>${news.details.length > 500 ? news.details.slice(0,100)+'......': news.details}</p>
+            <div class="card-actions flex justify-between items-center">
                 <div>
-                    <img src="${news.author.img}" class="w-10"/>
+                    <img src="${news.author.img}" class="w-10">
                     <h1>${news.author.name ? news.author.name : 'Data is not available' }</h1>
                 </div>
                 <div>
-                <h1>Published : ${news.author.published_date ? news.author.published_date : 'Data is not available' }</h1>
+                <h1>Published : ${news.author.published_date ? news.author.published_date : 'Data is    not available' }</h1>
                 <h1>Total Views : ${news.total_view ? news.total_view : 'no data found'}</h1>
                 </div>
                 <div>
-                    <label for="my-modal-3" class="btn btn-primary">Deatails</label>
-                    <button class="btn btn-primary">Read More</button>
+                <label for="my-modal-3" class="btn btn-primary modal-button" 
+                onclick="showDetails('${name}','${img}','${published_date}','${badge}','${number}')"
+                >Show Details</label>
                 </div>
-          </div>
+            </div>
+            </div>
         </div>
-    </div>
         `
-        newsContainer.appendChild(newNewsDiv);
-    }
+         newsContainer.appendChild(newNewsDiv);
+    })
 }
 isLoading(false);
 }
 
-const showDetails = (details,image) =>{
-    const modalContainer = document.getElementById('modal-container');
-    modalContainer.innerHTML = ''
-    modalContainer.innerHTML = `
-    <input type="checkbox" id="my-modal-4" class="modal-toggle" />
-    <input type="checkbox" id="my-modal-3" class="modal-toggle" />
-    <div class="modal">
-      <div class="modal-box relative">
-        <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-        <img src="${image}">
-        <p class="py-4">${details}</p>
-      </div>
-    </div>
-    `
+const showDetails = (name,img,published_date,badge,number) =>{
+    console.log(name,img)
+    const modalBody = document.getElementById('modal-body');
+    // modalBody.innerHTML = `<h1>Hello Modal</h1>`
+    modalBody.innerHTML = `
+    <h1 class="text-2xl text-center text-green-600">News Rating</h1>
+    <h1 class="text-xl text-yellow-500 font-bold">Ratings : ${number}</h1>
+    <h1 class="text-xl">Quality : ${badge}</h1>
+    <hr>
+    <h1 class="text-2xl text-center my-3 text-green-600">Author Details</h1>
+     <img src="${img}" class="w-1/3 rounded-full mx-auto"/>
+     <h1 class="text-xl text-green text-center">Authors Name : <u>${name ? name : 'no data available'}</u></h1>
+     <h2 class="text-xl text-center">Publishing Date : ${published_date}</h2>
+     `
 }
-
 
 // common function for loader...
 const isLoading = (condition)=>{
@@ -121,17 +123,10 @@ const isLoading = (condition)=>{
     }
 }
 
-// //news page redirecting
-// document.getElementById('news').addEventListener('click',function(){
-//     window.location.href = './index.html'
-// })
-
-// // blog page redirecting onclick event..
-// document.getElementById('blog').addEventListener('click',function(){
-//     window.location.href = './blog.html'
-// })
-
 //loading all categories on page load
 loadCategories();
 // loading all news on page load
-loadNews(08);
+// loadNews(08);
+
+
+
