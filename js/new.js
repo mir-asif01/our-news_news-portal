@@ -4,8 +4,14 @@ const loadCategories = () =>{
     fetch('https://openapi.programming-hero.com/api/news/categories')
     .then(res => res.json())
     .then(categories => showCategories(categories.data.news_category))
-    .catch(err => console.log(err));
+    .catch(err => showError(err));
 }
+
+const showError = (err) =>{
+    window.alert('Error on fetching API')
+    document.write(err);
+}
+
 const showCategories = (categories) =>{
     for(const category of categories){
         // console.log(category.category_id)
@@ -17,7 +23,6 @@ const showCategories = (categories) =>{
         categoryContainer.appendChild(newCategoryDiv)
     }
 }
-loadCategories();
 
 ///////////////////////////////////////////////
 // show news function
@@ -126,5 +131,7 @@ document.getElementById('blog').addEventListener('click',function(){
     window.location.href = './blog.html'
 })
 
+//loading all categories on page load
+loadCategories();
 // loading all news on page load
-loadNews(08);
+// loadNews(08);
