@@ -7,39 +7,43 @@ const loadCategories = () =>{
     .catch(err => showError(err));
 }
 
+// showing error for category loading api...
 const showError = (err) =>{
     window.alert('Error on fetching API')
     document.write(err);
 }
 
+// showing category
 const showCategories = (categories) =>{
     for(const category of categories){
-        // console.log(category.category_id)
         const categoryContainer = document.getElementById('categories');
         const newCategoryDiv = document.createElement('div');
         newCategoryDiv.innerHTML = `
-        <button class="text-2xl" onclick="loadNews(${category.category_id})" >${category.category_name}</button>
+        <button class="text-2xl" onclick="loadNews(${category.category_id})" >
+        <span class="text-red-400">${category.category_name}</span></button>
         `
         categoryContainer.appendChild(newCategoryDiv)
     }
 }
 
-///////////////////////////////////////////////
-// show news function
-
+// loading news
 const loadNews = (category) =>{
-    // console.log(category);
     isLoading(true);
     const url =`https://openapi.programming-hero.com/api/news/category/0${category}`
     fetch(url)
     .then(res => res.json())
-    .then(allNews => showNews(allNews.data));
+    .then(allNews => showNews(allNews.data))
+    .catch(err => showError2(err))
 }
 
+// showing error for news loading api
+const showError2 = (err) =>{
+    window.alert('Error on fetching API')
+    document.write(err);
+}
 
-
+//showing news
 const showNews = (UnsoetedNewsArray) =>{
-    // console.log(UnsoetedNewsArray)
     const newsContainer = document.getElementById('news-container');
     newsContainer.innerHTML = '';
     const itemCounter = document.getElementById('item-counter');
@@ -58,20 +62,16 @@ const showNews = (UnsoetedNewsArray) =>{
     }
     else{
     sortedNewsArray.forEach(news => {
-        console.log(news)
-        // const {details,image_url} = news;
         itemCounter.innerText = `${sortedNewsArrayLength} news found`;        
-        // const {details,image_url} = news;
         const {name,img,published_date} = news.author;
         const {badge,number} = news.rating;
-        console.log(name,img)
         const newNewsDiv = document.createElement('div');
         newNewsDiv.innerHTML = `
         <div class="card lg:card-side bg-base-100 m-3 shadow-xl">
             <img src="${news.thumbnail_url}" alt="Album">
             <div class="card-body">
                 <h2 class="card-title font-bold">${news.title}</h2>
-                <p>${news.details.length > 500 ? news.details.slice(0,100)+'......': news.details}</p>
+                <p>${news.details.length > 300 ? news.details.slice(0,120)+'......': news.details}</p>
             <div class="card-actions flex justify-between items-center">
                 <div>
                     <img src="${news.author.img}" class="w-10">
@@ -96,10 +96,9 @@ const showNews = (UnsoetedNewsArray) =>{
 isLoading(false);
 }
 
+//showing details using modal
 const showDetails = (name,img,published_date,badge,number) =>{
-    console.log(name,img)
     const modalBody = document.getElementById('modal-body');
-    // modalBody.innerHTML = `<h1>Hello Modal</h1>`
     modalBody.innerHTML = `
     <h1 class="text-2xl text-center text-green-600">News Rating</h1>
     <h1 class="text-xl text-yellow-500 font-bold">Ratings : ${number}</h1>
@@ -126,7 +125,7 @@ const isLoading = (condition)=>{
 //loading all categories on page load
 loadCategories();
 // loading all news on page load
-// loadNews(08);
+loadNews(08);
 
 
 
