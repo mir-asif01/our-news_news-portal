@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular Blog</title>
+     <!-- custom css -->
+     <link rel="stylesheet" href="./css/style.css">
+     <!-- tailwind cdn -->
+     <script src="https://cdn.tailwindcss.com"></script>
+     <!-- daisyUI cdn -->
+     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <main class="w-full mx-auto bg-gray-100 p-2">
+        <header>
+            <div class="navbar mb-4">
+                <div class="flex-1">
+                  <h1 class="text-3xl font-semibold"><span class="bg-amber-200 mx-1 p-2 rounded-lg font-bold">Our</span> News</h1>
+                </div>
+                <div class="flex-none gap-2">
+                  <div class="form-control">
+                    
+                  </div>
+                  <div class="dropdown dropdown-end">
+                        <div class="flex">
+                            <h1 class="bg-green-200 mx-1 p-1 rounded-lg text-2xl cursor-pointer font-semibold">News</h1>
+                            <h1 class="bg-green-200 mx-1 p-1 rounded-lg text-2xl cursor-pointer font-semibold" id="blog">Blog</h1>
+                        </div>
+                  </div>
+                </div>
+            </div>
+        </header>
+        <section class="w-3/4 mx-auto">
+            <h1 class="text-3xl font-semibold my-5">Popular Questions</h1>
+            <div class="bg-white p-3">
+                <h2 class="text-2xl font-semibold">Q-1 : Var vs let vs Const</h2>
+                <hr>
+                <p>Variables declared with var and const are scoped to the immediate function body.
+                    Variables declared with the var keyword are hoisted. Hoisting means that the variable can be accessed in their enclosing scope even before they are declared.
+                    <br>
+                    <br>
+                    Variables declared with the let keyword are block-scoped, which means the variables will have scope to the immediate enclosing block.
+                    let is the improved version of var. let eliminates all the issues of var that we have talked about in the previous section. let has a similar syntax to var but has a more strict scope.
+                </p>
+            </div>
+            <div class="bg-white p-3">
+                <h2 class="text-2xl font-semibold">Q-2 : map,forEach,filter and find</h2>
+                <hr>
+                <p>
+                    The map() method in JavaScript creates an array by calling a specific function on each element present in the parent array. It is a non-mutating method. Generally map() method is used to iterate over an array and calling function on every element of array.
+                    <br>
+                    <br>
+                    The arr.forEach() method calls the provided function once for each element of the array. The provided function may perform any kind of operation on the elements of the given array.
+                    <br>
+                    <br>
+                    The arr.filter() method is used to create a new array from a given array consisting of only those elements from the given array which satisfy a condition set by the argument method. 
+                    <br>
+                    <br>
+                    The arr.find() method in Javascript is used to get the value of the first element in the array that satisfies the provided condition. It checks all the elements of the array and whichever first element satisfies the condition is going to print. This function will not work function having the empty array elements, also does not change the original array.
+                </p>
+            </div>
+            <div class="bg-white p-3">
+                <h2 class="text-2xl font-semibold">Q-3 : regular function vs Arrow Function</h2>
+                <hr>
+                <p>Regular functions created using function declarations or expressions are constructible and callable. Since regular functions are constructible, they can be called using the new keyword. However, the arrow functions are only callable and not constructible, i.e arrow functions can never be used as constructor functions.
+                </p>
+            </div>
+            <div class="bg-white p-3">
+                <h2 class="text-2xl font-semibold">Q-4 : Why we use template string?</h2>
+                <hr>
+                <p>Template literals are a new form of making strings in JavaScript that add a lot of powerful new capabilities, such as creating multi-line strings more easily and using placeholders to embed expressions in a string. In addition, an advanced feature called tagged template literals allows you to perform operations on the expressions within a string. All of these capabilities increase your options for string manipulation as a developer, letting you generate dynamic strings that could be used for URLs or functions that customize HTML elements.
+                </p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

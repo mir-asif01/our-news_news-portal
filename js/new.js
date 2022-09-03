@@ -42,9 +42,9 @@ const showNews = (newsArray) =>{
     itemCounter.innerText = `${newsArrayLength} news found`;
     // itemCounter.innerText = '';
     for(const news of newsArray){
-        console.log(news)
+        // console.log(news)
         // console.log(news.author)
-        // console.log(news.total_view ? news.total_view : 'no data')
+        console.log(news.total_view ? news.total_view : 'no data')
         const {details,image_url} = news;
         // console.log(details)
         // console.log(image_url)
@@ -92,3 +92,18 @@ const showDetails = (details,image) =>{
     </div>
     `
 }
+
+// const sortNewsAscendingByTotalViews = () =>{
+
+// }
+
+
+// blog page redirecting onclick event..
+
+document.getElementById('blog').addEventListener('click',function(){
+    window.location.href = './blog.html'
+})
+// news page redirecting onclick event
+document.getElementById('news').addEventListener('click',function(){
+    window.location.href = './index.html'
+})
